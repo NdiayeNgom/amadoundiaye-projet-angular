@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>Calculatrice</title>
+ </head>
+ <body>
+   <label>Entrez les valeurs séparées par des virgules :</label>
+   <input type="text" id="inputValues">
+   <button onclick="handleCalculateAverage()">Calculer</button>
+   <br>
+   <label>Résultat :</label>
+   <input type="text" id="result" readonly>
+   <script src="./calculator.js"></script>
+   <!-- <script src="./calculator.js" type="module"></script> 
+   import {} from './calculator.js' -->
+   <script>
+    function handleCalculateAverage() {
+        const inputValues = document.getElementById("inputValues").value;
+        const values = inputValues.split(",").map((value) => parseFloat(value.trim()));
+        const average = calculateAverage(values);
+        document.getElementById("result").value = isNaN(average) ? "Veuillez saisir des valeurs numériques valides" : average;
+    }
+   </script>
+ </body>
+</html>
