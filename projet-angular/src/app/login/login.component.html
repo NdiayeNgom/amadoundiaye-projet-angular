@@ -1,0 +1,12 @@
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+
+  <label for="email">E-mail</label><br>
+  <input id="email" type="text" formControlName="email" required><br>
+
+  <label for="password">Mot de passe</label><br>
+  <input id="password" type="text" formControlName="password" required><br>
+
+  <button type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+
+</form>

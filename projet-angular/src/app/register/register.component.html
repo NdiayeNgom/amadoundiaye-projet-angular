@@ -1,22 +1,51 @@
-<div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-      <h2>Créer un compte</h2>
-      <form >
-        <div class="form-group">
-          <label for="email">Adresse mail</label>
-          <input type="text"
-                 id="email"
-                 class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="password">Mot de passe</label>
-          <input type="password"
-                 id="password"
-                 class="form-control">
-        </div>
-        <button class="btn btn-primary"
-                type="submit">Créer mon compte</button>
-      </form>
-      <p class="text-danger"></p>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<ng-container *ngIf="registerForm">
+  <div class="container">
+    <form [formGroup]="registerForm" (ngSubmit)="signUp()" class="form">
+    <div class="form-group mt-5">
+      <label for="firstName" class="form-label" >Prénom</label>
+      <input id="firstName" type="text" formControlName="firstName" class="form-control">
+      <div class="form-error" color="red"
+            *ngIf="(registerForm.controls['firstName'].touched) && 
+              registerForm.controls['firstName'].errors &&
+              registerForm.controls['firstName'].errors['required']"
+        >
+        Prénom obligatoire
+      </div>
     </div>
-</div>
+
+    <div class="form-group mt-3">
+      <label for="lastName">Nom</label>
+      <input id="lastName" type="text" formControlName="lastName"  class="form-control">
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="email">E-mail</label>
+      <input id="email" type="text" formControlName="email"  class="form-control">
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="phoneNumber">Numéro de téléphone</label>
+      <input id="phoneNumber" type="text" formControlName="phoneNumber"   class="form-control">
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="role">Rôle</label>
+      <input id="role" type="text" formControlName="role" class="form-control" >
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="password">Mot de passe</label>
+      <input id="password" type="text" formControlName="password"  class="form-control">
+    </div>
+
+    <div class="form-group mt-3">
+      <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary mb-3">Enregistrer</button>
+    </div>
+    </form>
+  </div>
+</ng-container>
+
