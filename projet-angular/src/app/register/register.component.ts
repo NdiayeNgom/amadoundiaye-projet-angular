@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { FormArray } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ import { FormArray } from '@angular/forms';
 export class RegisterComponent implements OnInit{
   registerForm!: FormGroup ;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit() {
       this.registerForm = this.fb.group({
@@ -35,6 +36,12 @@ export class RegisterComponent implements OnInit{
       });
   } 
   signUp(){
+    const user = this.registerForm.value as User;
+    this.auth.register(user).subscribe(
+      (res) => { console.log(res); },
+      (error) => { console.error(error); }
+    );
+    //this.auth.register
     console.log(this.registerForm.value);
   }
 }
