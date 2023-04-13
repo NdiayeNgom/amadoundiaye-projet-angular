@@ -7,14 +7,17 @@ import { AppComponent } from './app.component';
 import { HelloComponent } from './hello/hello.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ProgramFormComponent } from './programs/program-form/program-form.component';
+import { AuthInterceptor } from 'auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     HelloComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ProgramFormComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,12 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi   : true,
+    },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
